@@ -18,7 +18,7 @@ class ChirpSeeder extends Seeder
                     ? collect([
                     User::create([
                         'name' => 'Alice Developer',
-                        'email' => 'alice@example.com',
+                        'email' => 'alice2@example.com',
                         'password' => bcrypt('password'),
                     ]),
                     User::create([
