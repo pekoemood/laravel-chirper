@@ -20,13 +20,29 @@
                     <span class="text-sm font-semibold">{{ $chirp->user ? $chirp->user->name : 'Anonymous' }}</span>
                     <span class="text-base-content/60">.</span>
                     <span class="text-sm text-base-content/60">{{ $chirp->created_at->diffForHumans() }}</span>
+                    @if ($chirp->updated_at->gt($chirp->created_at->addSeconds(5)))
+                        <span class="text-base-content/60">.</span>
+                        <span class="text-sm text-base-content/60 italic">edited</span>
+                    @endif
                 </div>
+
+                <div class="flex gap-1">
+                    <a href="/chirps/{{ $chirp->id }}/edit" class="btn btn-ghost btn-xs">
+                        Edit
+                    </a>
+                    <form action="/chirps/{{ $chirp->id }}/" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete the this chirp?')" class="btn btn-ghost btn-xs text-error">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+
                 <p class="mt-1">
                     {{ $chirp->message }}
                 </p>
             </div>
-
-
         </div>
     </div>
 </div>
