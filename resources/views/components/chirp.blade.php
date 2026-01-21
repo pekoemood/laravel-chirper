@@ -30,7 +30,7 @@
                     <a href="/chirps/{{ $chirp->id }}/edit" class="btn btn-ghost btn-xs">
                         Edit
                     </a>
-                    <form action="/chirps/{{ $chirp->id }}/" method="POST">
+                    <form action="/chirps/{{ $chirp->id }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('Are you sure you want to delete the this chirp?')" class="btn btn-ghost btn-xs text-error">
