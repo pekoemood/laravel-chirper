@@ -73,6 +73,8 @@ class ChirpController extends Controller
         //     abort(403);
         // }
 
+        $this->authorize('update',$chirp);
+
 
         $validated = $request->validate([
             'message' => 'required|string|max:255',
@@ -88,6 +90,8 @@ class ChirpController extends Controller
      */
     public function destroy(Chirp $chirp)
     {
+        $this->authorize('delete', $chirp);
+
         $chirp->delete();
 
         return redirect('/')->with('success', 'Chirp deleted!');
