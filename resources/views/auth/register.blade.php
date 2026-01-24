@@ -64,7 +64,7 @@
                         @enderror
 
                         <!-- Password Confirmation -->
-                        <label class="label-floating mb-6">
+                        <label class="floating-label mb-6">
                             <input type="password"
                                     name="password_confirmation"
                                     placeholder="*******"
@@ -72,6 +72,11 @@
                             >
                             <span>Confirm Password</span>
                         </label>
+                        @error('password')
+                            <div class="label -mt-4 mb-2">
+                                <span class="label-text-alt text-error">{{ $message }}</span>
+                            </div>
+                        @enderror
 
                         <!-- Submit Button -->
                         <div class="form-control mt-8">
