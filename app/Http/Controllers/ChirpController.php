@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chirp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class ChirpController extends Controller
@@ -60,7 +61,7 @@ class ChirpController extends Controller
      */
     public function edit(Chirp $chirp)
     {
-        $this->authorize('update', $chirp);
+        Gate::authorize('update', $chirp);
         return view('chirps.edit', compact('chirp'));
     }
 
@@ -73,8 +74,7 @@ class ChirpController extends Controller
         //     abort(403);
         // }
 
-        $this->authorize('update',$chirp);
-
+        Gate::authorize('update', $chirp);
 
         $validated = $request->validate([
             'message' => 'required|string|max:255',
@@ -90,7 +90,7 @@ class ChirpController extends Controller
      */
     public function destroy(Chirp $chirp)
     {
-        $this->authorize('delete', $chirp);
+        Gate::authorize('delete', $chirp);
 
         $chirp->delete();
 
