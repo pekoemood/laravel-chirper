@@ -18,6 +18,13 @@ class Login extends Controller
             'password' => 'required',
         ]);
 
-        if(Auth::attempt($credentials, $request->boolean('remember')))
+        if(Auth::attempt($credentials, $request->boolean('remember'))) {
+            $request->session()->regenerate();
+            return redirect()->intended('/')->with('success', 'Welcome Back!');
+        }
+
+        return back()
+            ->withErrors(['email' => 'The provided credentials do not match our records.'])
+            ->onlyInput('email');
     }
 }
